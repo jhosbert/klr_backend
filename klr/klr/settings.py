@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = (
     'django.contrib.admin',
+    'django.contrib.admindocs',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -90,4 +91,6 @@ MEDIA_URL = '/media/'
 
 STATIC_URL = '/static/'
 
-TEMPLATE_DIR = (os.path.join(RUTA_PROYECTO,'templates'))
+TEMPLATE_DIRS = (os.path.join(RUTA_PROYECTO,'templates'))
+
+TEMPLATE_LOADERS = ('django.template.loaders.filesystem.Loader','django.template.loaders.app_directories.Loader',)
