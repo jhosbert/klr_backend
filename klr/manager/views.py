@@ -3,6 +3,7 @@ from django.contrib.auth import login, authenticate,logout
 from django.template import RequestContext
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponseRedirect 
+from manager.models import *
 
 # Create your views here.
 def loginUser(request):
@@ -26,3 +27,6 @@ def loginUser(request):
 		formulario = AuthenticationForm()
 	return render_to_response('login.html',{'formulario':formulario},context_instance = RequestContext(request))
 
+def todos_foros(request,id_seccion):
+	seccion = Seccion.objects.get(id=id_seccion)
+	return render_to_response('todos_foros.html',{'seccion':seccion},context_instance = RequestContext(request))	

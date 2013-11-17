@@ -1,5 +1,19 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-# Create your models here.
+class Respuesta(models.Model):
+	texto = models.CharField(max_length=500)
+	usuario = models.ForeignKey(User)
+	
+class Comentario(models.Model):
+	texto = models.CharField(max_length=500)
+	usuario = models.ForeignKey(User)
 
+class Foro(models.Model):
+	nombre = models.CharField(max_length=50)
+	comentario = models.ManyToManyField(Comentario)
 
+class Seccion(models.Model):
+	nombre = models.CharField(max_length=50)
+	foro = models.ManyToManyField(Foro)
+	

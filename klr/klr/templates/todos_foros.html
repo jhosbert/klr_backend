@@ -1,0 +1,8 @@
+<html>
+	{% for foros in seccion.foro.all %}
+		{{foros.nombre}}
+
+		{% empty %}
+			no hay foros en este momento
+	{% endfor %}
+</html>

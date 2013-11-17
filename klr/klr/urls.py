@@ -11,5 +11,6 @@ urlpatterns = patterns('',
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^login/$', 'manager.views.loginUser'),
+    url(r'^todos_foros/(?P<id_seccion>.*)$', 'manager.views.todos_foros'),
 
 )
