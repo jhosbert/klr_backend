@@ -16,4 +16,9 @@ class Foro(models.Model):
 class Seccion(models.Model):
 	nombre = models.CharField(max_length=50)
 	foro = models.ManyToManyField(Foro)
+
+class Viaje(models.Model):
+	titulo = models.CharField(max_length=50)
+	historia = models.CharField(max_length=500)
+	aprobado = models.BooleanField(default=False)
 	

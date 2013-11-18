@@ -12,5 +12,6 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^login/$', 'manager.views.loginUser'),
     url(r'^todos_foros/(?P<id_seccion>.*)$', 'manager.views.todos_foros'),
-
+    url(r'^viaje/crearViaje/$', 'manager.views.crear_viaje'),
+    url(r'^viaje/todos_viajes/$', 'manager.views.todos_viajes'),
 )

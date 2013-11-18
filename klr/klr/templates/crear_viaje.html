@@ -1,0 +1,12 @@
+<html>
+	<form id='formulario' enctype='multypart/form-data' method='post' action=''> {%csrf_token%}
+		{{formulario}}
+
+		<input type = "submit" value = "Crear Viaje">
+
+	</form>
+	
+	{%if user.is_authenticated %}hola
+	{%endif%}	
+	{{mensaje}}
+</html>
