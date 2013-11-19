@@ -33,13 +33,13 @@ def todos_foros(request,id_seccion):
 
 def todos_viajes(request):
 	viaje = Viaje.objects.all()
-	print viaje[1].titulo
 	return render_to_response('todos_viajes.html',{'viaje':viaje},context_instance = RequestContext(request))
 
 def crear_viaje(request):
 	if request.method=='POST':
 		formulario = ViajeForm(request.POST,request.FILES)
 		if formulario.is_valid():
+			#formulario.handle_uploaded_file(request.FILES['file'])
 			formulario.save()
 			return HttpResponseRedirect('/viaje/crearViaje')
 	else:
