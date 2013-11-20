@@ -36,12 +36,14 @@ def todos_viajes(request):
 	return render_to_response('todos_viajes.html',{'viaje':viaje},context_instance = RequestContext(request))
 
 def crear_viaje(request):
-	if request.method=='POST':
-		formulario = ViajeForm(request.POST,request.FILES)
-		if formulario.is_valid():
-			#formulario.handle_uploaded_file(request.FILES['file'])
-			formulario.save()
-			return HttpResponseRedirect('/viaje/crearViaje')
-	else:
-		formulario = ViajeForm()
-		return render_to_response('crear_viaje.html',{'formulario':formulario},context_instance=RequestContext(request))
+    if request.method == 'POST':
+        formulario = ViajeForm(request.POST,request.FILES)
+        if formulario.is_valid:
+            titulo = request.POST['titulo']
+            historia = request.POST['historia']
+            imagen = request.POST['imagen']
+            viaje = Viaje.objects.create(titulo=titulo, historia=historia, imagen=imagen)
+            viaje.save()
+            return HttpResponseRedirect('/viaje/crearViaje')
+    formulario = ViajeForm()
+    return render_to_response('crear_viaje.html',{'formulario':formulario},context_instance=RequestContext(request))
