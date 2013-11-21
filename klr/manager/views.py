@@ -55,5 +55,10 @@ def Registro_usuario(request):
 			nombre = formulario.cleaned_data['nombre']
 			contrasena = formulario.cleaned_data['contrasena']
 			correo = formulario.cleaned_data['correo']
-
+			user = User.objects.create_user(correo,contrasena)
+			user.first_name = nombre
+			user.is_active = True
+			user.save()
+			return HttpResponseRedirect ('/')
 	formulario = RegistroUsuarioForm()	
+	return render_to_response('registro_usuario.html',{'formulario':formulario},context_instance=RequestContext(request))
