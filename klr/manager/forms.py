@@ -17,5 +17,5 @@ class ViajeForm(forms.ModelForm):
 
 class RegistroUsuarioForm(forms.ModelForm):
 	nombre = forms.CharField(max_length = 100)
-	contrasena = 
-	correo =
+	contrasena = forms.CharField(max_length = 32, widget = forms.PasswordInput)
+	correo = forms.EmailField(help_text='A valid email address, please.')

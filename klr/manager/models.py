@@ -22,4 +22,3 @@ class Viaje(models.Model):
 	historia = models.CharField(max_length=500)
 	aprobado = models.BooleanField(default=False)
 	imagen = models.ImageField(upload_to='carga', verbose_name='ImageTravel')
-	
