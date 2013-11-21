@@ -14,3 +14,8 @@ class ViajeForm(forms.ModelForm):
 		destination = open(MEDIA_URL + '/images/'+file.name, 'wb+')
 		for chunk in file.chunks():
 			destination.write(chunk)"""
+
+class RegistroUsuarioForm(forms.ModelForm):
+	nombre = forms.CharField(max_length = 100)
+	contrasena = 
+	correo =

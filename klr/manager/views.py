@@ -47,3 +47,13 @@ def crear_viaje(request):
             return HttpResponseRedirect('/viaje/crearViaje')
     formulario = ViajeForm()
     return render_to_response('crear_viaje.html',{'formulario':formulario},context_instance=RequestContext(request))
+
+def Registro_usuario(request):
+	if request.method == 'POST':
+		formulario = RegistroUsuarioForm(request.POST,request.FILES)
+		if formulario.is_valid():
+			nombre = formulario.cleaned_data['nombre']
+			contrasena = formulario.cleaned_data['contrasena']
+			correo = formulario.cleaned_data['correo']
+
+	formulario = RegistroUsuarioForm()	
