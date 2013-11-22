@@ -1,10 +1,10 @@
 <html>
+    <h2> Todos Los Viajes </h2>
 	{% for viajes in viaje %}
-		{{viajes.titulo}}
+		<a href="/viaje/detalles_viaje/{{viajes.id}}"> {{viajes.titulo}} </a>
 		<Br>
 		{% empty %}
 			no hay historias de viajes en este momento
 	{% endfor %}
 
-	viajesss
 </html>

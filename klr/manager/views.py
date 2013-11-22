@@ -65,3 +65,7 @@ def Registro_usuario(request):
             return HttpResponseRedirect ('/')
     formulario = RegistroUsuarioForm()
     return render_to_response('registro_usuario.html',{'formulario':formulario},context_instance=RequestContext(request))
+
+def detalles_viaje(request,id_viaje):
+    viaje = Viaje.objects.get(id=id_viaje)
+    return render_to_response('detalles_viaje.html',{'viaje':viaje},context_instance=RequestContext(request))

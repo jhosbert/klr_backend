@@ -17,5 +17,6 @@ urlpatterns = patterns('',
     url(r'^todos_foros/(?P<id_seccion>.*)$', 'manager.views.todos_foros'),
     url(r'^viaje/crearViaje/$', 'manager.views.crear_viaje'),
     url(r'^viaje/todos_viajes/$', 'manager.views.todos_viajes'),
+    url(r'^viaje/detalles_viaje/(?P<id_viaje>\d+)$', 'manager.views.detalles_viaje'),
     
 )

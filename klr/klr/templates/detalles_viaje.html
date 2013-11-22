@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <h2>{{viaje.titulo}}</h2>
+
+    <h3>Descripcion</h3>
+    <p>{{viaje.historia}}</p>
+
+    {% for image in viaje.imagen.all %}
+        <img src='{{MEDIA_URL}}{{image.imagen}}'>
+        {% empty%}
+            No hay Imagenes Asociadas
+    {% endfor %}
+</body>
+</html>
