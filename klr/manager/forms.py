@@ -1,21 +1,18 @@
 #encoding:utf-8
 from django.forms import ModelForm
 from django import forms
-from manager.models import Viaje
+from django.db import models
+from manager.models import *
+from django.contrib.auth.models import User
+from django.contrib.admin.widgets import AdminDateWidget
+from django.forms.extras.widgets import SelectDateWidget
+from django.forms.widgets import CheckboxSelectMultiple
 
-class ViajeForm(forms.ModelForm):
-	class Meta:
-		model = Viaje
-        exclude = {'aprobado'}
-
-	"""def handle_uploaded_file(self,file):
-		#print type(file), "file.name=",file.name
-		#print dir(file)
-		destination = open(MEDIA_URL + '/images/'+file.name, 'wb+')
-		for chunk in file.chunks():
-			destination.write(chunk)"""
+class ViajeForm(forms.Form):
+    titulo = forms.CharField(max_length=50)
+    historia = forms.CharField(max_length=500)
 
 class RegistroUsuarioForm(forms.ModelForm):
-	nombre = forms.CharField(max_length = 100)
-	contrasena = forms.CharField(max_length = 32, widget = forms.PasswordInput)
-	correo = forms.EmailField(help_text='A valid email address, please.')
+    nombre = forms.CharField(max_length = 100)
+    contrasena = forms.CharField(max_length = 32, widget = forms.PasswordInput)
+    correo = forms.EmailField(help_text='A valid email address, please.')

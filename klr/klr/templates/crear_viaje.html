@@ -1,12 +1,28 @@
-<html>
-	<form id='formulario' enctype='multypart/form-data' method='post' action=''> {%csrf_token%}
-		{{formulario}}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title></title>
 
-		<input type = "submit" value = "Crear Viaje">
+    <script src="{{ STATIC_URL }}js/jquery.js"></script>
+    <script>
+        function Agregar() {
+            $("#div_imagenes").append("<input type=\"file\" name=\"lista_imagenes\" />");
+        }
+    </script>
+</head>
+<body>
 
+    <form id='formulario' enctype='multipart/form-data' method='post' action=''>{% csrf_token %}
+        {{formulario.titulo.label}}{{formulario.titulo}}{{formulario.titulo.errors}}
+        {{formulario.historia.label}}{{formulario.historia}}{{formulario.historia.errors}}
+
+        <div id="div_imagenes">
+            Imagenes: <input type="file" name="lista_imagenes" />
+        </div>
+        <a id="botonImagen" onClick="Agregar()" >Agregar campo</a>
+        
+        <input type='submit' value='Enviar'/>
 	</form>
-	
-	{%if user.is_authenticated %}hola
-	{%endif%}	
-	{{mensaje}}
+
+</body>
 </html>

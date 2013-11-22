@@ -1,14 +1,7 @@
-"""
-Django settings for klr project.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/1.6/topics/settings/
-
-For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.6/ref/settings/
-"""
+# Django settings for klr project.
 #encoding:utf-8
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+
+# Identificando la ruta del proyecto
 import os
 RUTA_PROYECTO = os.path.dirname(os.path.realpath(__file__))
 
@@ -20,28 +13,39 @@ _ruta_static = RUTA_PROYECTO.split("/")
 _ruta_static = _ruta_static[0:len(_ruta_static)-2] + ["klr","static"]
 _ruta_static = "/".join(_ruta_static)
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+TEMPLATE_DEBUG = DEBUG
 
-TEMPLATE_DEBUG = True
+ADMINS = (
+    # ('Your Name', 'your_email@example.com'),
+)
 
-# Database
-# https://docs.djangoproject.com/en/1.6/ref/settings/#databases
+MANAGERS = ADMINS
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': _ruta_db,          # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'NAME': _ruta_db,                      # Or path to database file if using sqlite3.
+        # The following settings are not used with sqlite3:
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'PORT': '',                      # Set to empty string for default.
     }
 }
 
+# Hosts/domain names that are valid for this site; required if DEBUG is False
+# See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = []
 
+# Local time zone for this installation. Choices can be found here:
+# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
+# although not all choices may be available on all operating systems.
+# In a Windows environment this must be set to your system time zone.
 TIME_ZONE = 'America/Caracas'
 
+# Language code for this installation. All choices can be found here:
+# http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'es-VE'
 
 SITE_ID = 1
@@ -92,8 +96,8 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '0ezxo&u)0dwq0j8k2*$y(^l&9z27m6svay=u&2nfou4b^i8gi('
+# Make this unique, and don't share it with anybody.
+SECRET_KEY = '$r@z!$wzvl^&cja#%@_rku1@mr#+pt^cwq8(t0r8^)&2ifsjgb'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -103,31 +107,39 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # Uncomment the next line for simple clickjacking protection:
+    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
 ROOT_URLCONF = 'klr.urls'
 
+# Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'klr.wsgi.application'
 
-TEMPLATE_DIRS = (os.path.join(RUTA_PROYECTO,'templates'))
+TEMPLATE_DIRS = ( os.path.join(RUTA_PROYECTO,'templates' )
+    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+)
 
-# Application definition
 INSTALLED_APPS = (
-    'django.contrib.admin',
-    'django.contrib.admindocs',
     'django.contrib.auth',
-    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Uncomment the next line to enable the admin:
+    'django.contrib.admin',
+    # Uncomment the next line to enable admin documentation:
+    'django.contrib.admindocs',
     'manager',
+
 )
 
 # A sample logging configuration. The only tangible logging
