@@ -12,10 +12,14 @@ class Comentario(models.Model):
     usuario = models.ForeignKey(User)
 
 class Foro(models.Model):
+    def __unicode__(self):
+        return str(self.nombre)
     nombre = models.CharField(max_length=50)
     comentario = models.ManyToManyField(Comentario)
 
 class Seccion(models.Model):
+    def __unicode__(self):
+        return str(self.seccion)
     nombre = models.CharField(max_length=50)
     foro = models.ManyToManyField(Foro)
 

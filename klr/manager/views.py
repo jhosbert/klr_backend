@@ -14,7 +14,6 @@ def loginUser(request):
         password = request.POST['password']
         access = authenticate(username=username,password=password)
 
-        print access
         if access is not None:
             if access.is_active:
                 login(request,access)
@@ -47,8 +46,7 @@ def crear_viaje(request):
                 imagen.save()
                 viaje.imagen.add(imagen)
             return HttpResponseRedirect('/viaje/crearViaje')
-    else:
-        formulario = ViajeForm()
+    formulario = ViajeForm()
     return render_to_response('crear_viaje.html',{'formulario':formulario},context_instance = RequestContext(request))
 
 def Registro_usuario(request):
@@ -58,7 +56,7 @@ def Registro_usuario(request):
             nombre = formulario.cleaned_data['nombre']
             contrasena = formulario.cleaned_data['contrasena']
             correo = formulario.cleaned_data['correo']
-            user = User.objects.create_user(correo,contrasena)
+            user = User.objects.create_user(correo,correo,contrasena)
             user.first_name = nombre
             user.is_active = True
             user.save()
