@@ -16,3 +16,9 @@ class RegistroUsuarioForm(forms.ModelForm):
     nombre = forms.CharField(max_length = 100)
     contrasena = forms.CharField(max_length = 32, widget = forms.PasswordInput)
     correo = forms.EmailField(help_text='A valid email address, please.')
+
+class nuevoForoForm(forms.Form):
+    nombre = forms.CharField(max_length=20)
+
+class nuevoComentarioForm(forms.Form):
+    texto = forms.CharField(max_length=400)

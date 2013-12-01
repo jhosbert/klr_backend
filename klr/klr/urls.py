@@ -10,7 +10,8 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
     
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT,}),
-    
+
+    url(r'^$', 'manager.views.index'),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^login/$', 'manager.views.loginUser'),
@@ -18,5 +19,8 @@ urlpatterns = patterns('',
     url(r'^viaje/crearViaje/$', 'manager.views.crear_viaje'),
     url(r'^viaje/todos_viajes/$', 'manager.views.todos_viajes'),
     url(r'^viaje/detalles_viaje/(?P<id_viaje>\d+)$', 'manager.views.detalles_viaje'),
-    
+    url(r'^todas_secciones/$', 'manager.views.todas_secciones'),
+    url(r'^nuevoForo/(?P<id_seccion>.*)$', 'manager.views.nuevoForo'),
+    url(r'^detallesForo/(?P<id_foro>.*)$', 'manager.views.detallesForo'),
+
 )

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    HOLA, bienvenido KLR
+
+    <ul>
+        <li><a href="/login"> Iniciar Sesion </a></li>
+        <li><a href="/todas_secciones"> Foros </a></li>
+        {% if user.is_authenticated %} <li><a href="/viaje/crearViaje">Crear Viaje</a></li> {% endif %}
+    </ul>
+</body>
+</html>

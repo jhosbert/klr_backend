@@ -10,18 +10,19 @@ class Respuesta(models.Model):
 class Comentario(models.Model):
     texto = models.CharField(max_length=500)
     usuario = models.ForeignKey(User)
+    fecha = models.DateTimeField(auto_now=True)
 
 class Foro(models.Model):
     def __unicode__(self):
         return str(self.nombre)
     nombre = models.CharField(max_length=50)
-    comentario = models.ManyToManyField(Comentario)
+    comentario = models.ManyToManyField(Comentario,blank=True,null=True)
 
 class Seccion(models.Model):
     def __unicode__(self):
-        return str(self.seccion)
+        return str(self.nombre)
     nombre = models.CharField(max_length=50)
-    foro = models.ManyToManyField(Foro)
+    foro = models.ManyToManyField(Foro,blank=True,null=True)
 
 class Imagenes_Viajes(models.Model):
     def __unicode__(self):
@@ -34,4 +35,4 @@ class Viaje(models.Model):
     titulo = models.CharField(max_length=50)
     historia = models.CharField(max_length=500)
     aprobado = models.BooleanField(default=False)
-    imagen = models.ManyToManyField(Imagenes_Viajes)
+    imagen = models.ManyToManyField(Imagenes_Viajes,blank=True,null=True)

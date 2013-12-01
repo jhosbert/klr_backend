@@ -2,11 +2,14 @@ from django.shortcuts import render, render_to_response
 from django.contrib.auth import login, authenticate,logout
 from django.template import RequestContext
 from django.contrib.auth.forms import AuthenticationForm
-from django.http import HttpResponseRedirect 
+from django.http import HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
 from manager.models import *
 from manager.forms import *
 
-# Create your views here.
+def index(request):
+    return render_to_response('index.html',context_instance = RequestContext(request))
+
 def loginUser(request):
     if request.method == 'POST':
         formulario = AuthenticationForm(request.POST)
@@ -17,21 +20,22 @@ def loginUser(request):
         if access is not None:
             if access.is_active:
                 login(request,access)
-                return HttpResponseRedirect('/login')
-        formulario = AuthenticationForm()
-        print 'error'
-        return render_to_response('login.html',{'formulario':formulario,'mensaje':'eeeeeeeeeeerrrrorrr'},context_instance = RequestContext(request))
+                return HttpResponseRedirect('/')
+        else:
+            formulario = AuthenticationForm()
+            return render_to_response('login.html',{'formulario':formulario,'mensaje':'error al iniciar sesion'},context_instance = RequestContext(request))
     formulario = AuthenticationForm()
     return render_to_response('login.html',{'formulario':formulario},context_instance = RequestContext(request))
 
 def todos_foros(request,id_seccion):
-    seccion = Seccion.objects.get(id=id_seccion)
-    return render_to_response('todos_foros.html',{'seccion':seccion},context_instance = RequestContext(request))
+    seccion = Seccion.objects.get(id=int(id_seccion))
+    return render_to_response('todos_foros.html',{'seccion':seccion,'id_seccion':id_seccion},context_instance = RequestContext(request))
 
 def todos_viajes(request):
     viaje = Viaje.objects.all()
     return render_to_response('todos_viajes.html',{'viaje':viaje},context_instance = RequestContext(request))
 
+@login_required(login_url='/')
 def crear_viaje(request):
     if request.method == 'POST':
         formulario = ViajeForm(request.POST,request.FILES)
@@ -67,3 +71,41 @@ def Registro_usuario(request):
 def detalles_viaje(request,id_viaje):
     viaje = Viaje.objects.get(id=id_viaje)
     return render_to_response('detalles_viaje.html',{'viaje':viaje},context_instance=RequestContext(request))
+
+def todas_secciones(request):
+    secciones = Seccion.objects.all()
+    return render_to_response('todas_secciones.html',{'secciones':secciones},context_instance=RequestContext(request))
+
+def nuevoForo(request,id_seccion):
+    if request.method == 'POST':
+        formulario = nuevoForoForm(request.POST,request.FILES)
+        if formulario.is_valid():
+            nombre = formulario.cleaned_data['nombre']
+            foro = Foro.objects.create(nombre=nombre)
+            foro.save()
+
+            #ManyToMany
+            seccion = Seccion.objects.get(id = int(id_seccion))
+            seccion.foro.add(foro)
+            seccion.save()
+            return HttpResponseRedirect('/todos_foros/' + id_seccion)
+
+    formulario = nuevoForoForm()
+    return render_to_response('nuevoForo.html',{'formulario':formulario},context_instance=RequestContext(request))
+
+def detallesForo(request,id_foro):
+    foro = Foro.objects.get(id=int(id_foro))
+    if request.method == 'POST':
+        formulario = nuevoComentarioForm(request.POST,request.FILES)
+        if formulario.is_valid():
+            texto = formulario.cleaned_data['texto']
+            usuario = request.user
+            coment = Comentario.objects.create(texto=texto,usuario=usuario)
+            coment.save()
+            foro.comentario.add(coment)
+            foro.save()
+            return HttpResponseRedirect('/detallesForo/' + id_foro)
+
+    comentarios = foro.comentario.all().order_by('-fecha')
+    formulario = nuevoComentarioForm()
+    return render_to_response('detallesForo.html',{'foro':foro,'comentarios':comentarios,'formulario':formulario},context_instance=RequestContext(request))

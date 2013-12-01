@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nuevo Foro</title>
+</head>
+<body>
+
+
+    <form id='formulario' enctype='multipart/form-data' method='post' action=''>{% csrf_token %}
+        {{formulario.nombre.label}}{{formulario.nombre}}{{formulario.nombre.errors}}
+        <input type='submit' value='Crear'/>
+    </form>
+
+
+
+</body>
+</html>
