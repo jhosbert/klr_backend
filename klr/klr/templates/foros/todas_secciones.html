@@ -1,0 +1,32 @@
+{% extends 'tabla.html' %}
+{% load bootstrap %}
+
+    {% block mainsection %}
+
+    <h2> Secciones </h2>
+{% block seccion-contenido%}
+	{% block tabla %}
+            <table class="table table-striped table-bordered table-hover" id="content">
+                <thead>
+                    <th>Seccion</th>
+                    <th>Cantidad Foros</th>
+                </thead>
+
+                {% for seccion in secciones %}
+                    <tr>
+                        <td><a href="/todos_foros/{{seccion.id}}"> {{seccion.nombre}} </a></td>
+                        <td> {{seccion.foro.all.count}} </td>
+                    </tr>
+                {% empty %}
+                    No hay secciones registradas en este momento
+                {% endfor %}
+            </table>
+	{% endblock %}
+
+{% endblock %}
+
+
+
+    {% endblock %}
+
+

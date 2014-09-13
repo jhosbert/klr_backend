@@ -3,10 +3,11 @@ body {
 }
 
 .footer {
-  padding-top: 40px;
+  padding-top: 20px;
   padding-bottom: 40px;
-  margin-top: 40px;
+  margin-top: 20px;
   border-top: 1px solid #eee;
+
 }
 
 /* Main marketing message and sign up button */
@@ -86,3 +87,4 @@ body {
     padding-left: 0;
   }
 }
+

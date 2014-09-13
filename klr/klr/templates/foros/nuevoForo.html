@@ -1,0 +1,13 @@
+{% extends 'tabla.html' %}
+{% load bootstrap %}
+
+    {% block mainsection %}
+
+        <h2> Nuevo Foro  </h2>
+
+        <form id='formulario' enctype='multipart/form-data' method='post' action=''>{% csrf_token %}
+            {{formulario.nombre | bootstrap}}
+            <input type='submit' value='Crear'/>
+        </form>
+
+    {% endblock %}
